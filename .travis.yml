@@ -1,0 +1,13 @@
+sudo: false # faster builds
+language: java
+
+jdk:
+  - oraclejdk11
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: sankar-test
