@@ -20,9 +20,9 @@ public class UserRepository {
             .setTeam(row.get("team_name", String.class))
             .setAccessLevel(row.get("access_level", Integer.class));
 
-    public Mono<User> findByName(String name) {
+    public Mono<User> findByUserEmail(String name) {
         return client.execute(QueryConstant.FIND_USER_BY_NAME)
-                .bind("username",name)
+                .bind("username", name)
                 .map(userConverter::convert)
                 .one();
     }
