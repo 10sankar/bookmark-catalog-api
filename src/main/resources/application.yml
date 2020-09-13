@@ -1,3 +1,15 @@
+server:
+  port: 8080
+
 logging:
   level:
     org.springframework.data.r2dbc: DEBUG
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 396769735046060
+            client-secret: 1b10af35d885c122f48d40626347e749

@@ -32,11 +32,11 @@ create table tags(
 
 
 create table card_tag(
+   id INT AUTO_INCREMENT primary key,
    cid INT not null,
    tid INT NOT NULL,
    FOREIGN KEY (tid) REFERENCES tags(id),
-   FOREIGN KEY (cid) REFERENCES card(id),
-   UNIQUE KEY cid_tid (cid,tid)
+   FOREIGN KEY (cid) REFERENCES card(id)
 );
 
 create table card_queue(

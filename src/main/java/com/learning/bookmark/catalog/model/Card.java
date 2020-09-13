@@ -1,5 +1,6 @@
 package com.learning.bookmark.catalog.model;
 
+import com.learning.bookmark.catalog.entity.TableCard;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,5 +23,18 @@ public class Card {
     private String tribe;
     private String createdBy;
     private String lastUpdatedBy;
+    private Integer orgId;
     private List<String> tags;
+
+    public TableCard toCardEntity() {
+        return new TableCard()
+                .setId(this.id)
+                .setTitle(this.title)
+                .setDescription(this.description)
+                .setImageUrl(this.imageUrl)
+                .setCreatedBy(this.createdBy)
+                .setLastUpdatedBy(this.lastUpdatedBy)
+                .setHidden(this.hidden)
+                .setOrgId(this.orgId);
+    }
 }
