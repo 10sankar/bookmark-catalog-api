@@ -1,14 +1,14 @@
 insert into card
-(id, title, description, image_url,hidden,org_id,created_by, last_updated_by)
+(id, title, description, image_url,hidden,tribe,team,created_by, last_updated_by)
 values
-(1, 'Card title', 'say something about card', 'http://image.url',false,1,'sankar','sankar'),
-(2, 'Card title', 'say something about card', 'http://image.url',true, 2,'sankar','sankar'),
-(3, 'Card title', 'say something about card', 'http://image.url',false,3,'sankar','sankar'),
-(4, 'Card title', 'say something about card', 'http://image.url',false,4,'sankar','sankar'),
-(5, 'Card title', 'say something about card', 'http://image.url',false,5,'sankar','sankar'),
-(6, 'Card title', 'say something about card', 'http://image.url',true, 6,'sankar','sankar'),
-(7, 'Card title', 'say something about card', 'http://image.url',false,1,'sankar','sankar'),
-(8, 'Card title', 'say something about card', 'http://image.url',false,2,'sankar','sankar');
+(1, 'Card title', 'say something about card', 'http://image.url',false,'LTL','CRX','sankar','sankar'),
+(2, 'Card title', 'say something about card', 'http://image.url',true, 'GTG','YER','sankar','sankar'),
+(3, 'Card title', 'say something about card', 'http://image.url',false,'HTH','JAM','sankar','sankar'),
+(4, 'Card title', 'say something about card', 'http://image.url',false,'LTL','OLJ','sankar','sankar'),
+(5, 'Card title', 'say something about card', 'http://image.url',false,'GTG','PLQ','sankar','sankar'),
+(6, 'Card title', 'say something about card', 'http://image.url',true, 'HTH','KTM','sankar','sankar'),
+(7, 'Card title', 'say something about card', 'http://image.url',false,'LTL','CRX','sankar','sankar'),
+(8, 'Card title', 'say something about card', 'http://image.url',false,'GTG','YER','sankar','sankar');
 
 
 insert into org
@@ -49,39 +49,11 @@ values
 ------ Card Queue --------
 
 insert into card_queue
-(queue_id,cid, title,suggested_by)
+(queue_id,cid, title,description,image_url,tribe,team,hidden,remove,suggested_by)
 values
-(1,3,'change title', 'normal');
-
-insert into card_queue
-(queue_id,cid,image_url,suggested_by)
-values
-(2,5,'new image','normal');
-
-insert into card_queue
-(queue_id,cid,hidden,suggested_by)
-values
-(3,6,true,'normal');
-
-insert into card_queue
-(queue_id,cid,remove,suggested_by)
-values
-(4,8,true,'write');
-
-insert into card_queue
-(queue_id,cid,team_id,suggested_by)
-values
-(5,2,4,'normal');
-
-insert into card_queue
-(queue_id,title,description,image_url,hidden,team_id,suggested_by)
-values
-(6, 'Card title', 'say something about card', 'http://image.url',false,3,'read');
-
-insert into card_queue
-(queue_id,title,description,image_url,hidden,team_id,suggested_by)
-values
-(7, 'Card title', 'say something about card', 'http://image.url',true,4,'normal');
+(1,3,'change title','change desc','new url', 'HTH','JAM' 'normal',false ,false ,'read'),
+(2,5,'change title','change desc','new url', 'GTG','PLQ' 'normal',true ,false ,'read' ),
+(3,2,'change title','change desc','new url', 'GTG','YER' 'normal',true ,true ,'read' );
 
 
 ---- Group Creation Queue -------

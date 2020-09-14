@@ -1,6 +1,8 @@
 package com.learning.bookmark.catalog.config;
 
+import com.learning.bookmark.catalog.repo.CardQueueTableRepo;
 import com.learning.bookmark.catalog.repo.CardRepository;
+import com.learning.bookmark.catalog.repo.CardTableRepo;
 import com.learning.bookmark.catalog.repo.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +17,7 @@ public class RepoConfig {
     }
 
     @Bean
-    public CardRepository cardRepository(DatabaseClient client, UserRepository userRepository) {
-        return new CardRepository(client, userRepository);
+    public CardRepository cardRepository(DatabaseClient client, CardTableRepo cardTableRepo, CardQueueTableRepo queueTableRepo) {
+        return new CardRepository(client, cardTableRepo, queueTableRepo);
     }
 }

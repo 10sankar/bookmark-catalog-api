@@ -9,16 +9,19 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 
-@Table("card")
+@Table("card_queue")
 @Getter
 @Setter
 @ToString
 @Accessors(chain = true)
-public class TableCard {
+public class TableCardQueue {
 
     @Id
-    @Column("id")
+    @Column("queue_id")
     private Integer id;
+
+    @Column("cid")
+    private Integer cardId;
 
     @Column("title")
     private String title;
@@ -38,9 +41,9 @@ public class TableCard {
     @Column("team")
     private String team;
 
-    @Column("created_by")
-    private String createdBy;
+    @Column("remove")
+    private Boolean remove;
 
-    @Column("last_updated_by")
-    private String lastUpdatedBy;
+    @Column("suggested_by")
+    private String suggestedBy;
 }

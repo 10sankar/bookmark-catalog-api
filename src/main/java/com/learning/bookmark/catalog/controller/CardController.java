@@ -1,10 +1,10 @@
 package com.learning.bookmark.catalog.controller;
 
+import com.learning.bookmark.catalog.entity.TableCardQueue;
 import com.learning.bookmark.catalog.entity.TableTag;
 import com.learning.bookmark.catalog.model.Card;
 import com.learning.bookmark.catalog.model.User;
 import com.learning.bookmark.catalog.repo.CardRepository;
-import com.learning.bookmark.catalog.repo.CardTableRepo;
 import com.learning.bookmark.catalog.repo.UserRepository;
 import com.learning.bookmark.catalog.service.CardService;
 import com.learning.bookmark.catalog.service.TagService;
@@ -14,13 +14,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 
-
+@CrossOrigin(origins = "https://localhost:4200")
 @RestController
 @RequestMapping("/api/v1/cards")
 @RequiredArgsConstructor
@@ -28,7 +29,6 @@ public class CardController {
 
     private final CardRepository cardRepository;
     private final UserRepository userRepository;
-    private final CardTableRepo cardTableRepo;
     private final CardService cardService;
     private final TagService tagService;
 
@@ -43,8 +43,8 @@ public class CardController {
             @ApiResponse(responseCode = "404", description = "card not found",
                     content = @Content)})
     @GetMapping
-    public Flux<Card> getCards(@RequestParam("name") String name) {
-        return cardService.getCards(name);
+    public Flux<Card> getCards() {
+        return cardService.getCards("sankar");
     }
 
     @GetMapping("/user/{user}")
@@ -59,14 +59,13 @@ public class CardController {
 
 
     @GetMapping("/saveCard/{user}")
-    public Mono<Card> updateCardTab(@PathVariable("user") String user) {
+    public boolean updateCardTab(@PathVariable("user") String user) {
         Card card = new Card()
                 .setId(1)
                 .setTitle("new title")
                 .setCreatedBy("")
                 .setLastUpdatedBy("")
                 .setDescription("des")
-                .setOrgId(2)
                 .setTribe("GTG")
                 .setTeam("YER")
                 .setHidden(true)
@@ -75,7 +74,22 @@ public class CardController {
         return cardService.save(card, user);
     }
 
-    @GetMapping("/tag")
+    @GetMapping("/newCard/{user}")
+    public boolean newCardTab(@PathVariable("user") String user) {
+        Card card = new Card()
+                .setTitle("new title")
+                .setCreatedBy("")
+                .setLastUpdatedBy("")
+                .setDescription("des")
+                .setTribe("GTG")
+                .setTeam("YER")
+                .setHidden(true)
+                .setTags(Arrays.asList("api", "NEW", "java"))
+                .setImageUrl("");
+        return cardService.save(card, user);
+    }
+
+    @GetMapping(value = "/tag", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<TableTag> tags(@RequestParam("tag") String tag) {
         return tagService.save(tag);
     }
@@ -83,6 +97,11 @@ public class CardController {
     @GetMapping("/tagAll")
     public Flux<TableTag> tags() {
         return tagService.getTags();
+    }
+
+    @GetMapping(value = "/cardQueue", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Flux<TableCardQueue> cardQueue() {
+        return cardRepository.getCardsInQueue();
     }
 
 }

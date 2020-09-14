@@ -1,6 +1,7 @@
 package com.learning.bookmark.catalog.service;
 
 import com.learning.bookmark.catalog.constant.AccessLevel;
+import com.learning.bookmark.catalog.entity.TableCardQueue;
 import com.learning.bookmark.catalog.model.Card;
 import com.learning.bookmark.catalog.model.User;
 import com.learning.bookmark.catalog.repo.CardRepository;
@@ -8,6 +9,8 @@ import com.learning.bookmark.catalog.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @RequiredArgsConstructor
 public class CardService {
@@ -23,22 +26,42 @@ public class CardService {
                 );
     }
 
-    public Mono<Card> save(Card card, String userName) {
-        return userRepository.findByUserEmail(userName)
-                .flatMap(user -> {
+    public boolean save(Card card, String userName) {
+        AtomicBoolean isSaved = new AtomicBoolean(false);
+        userRepository.findByUserEmail(userName)
+                .doOnSuccess(user -> {
                     if (isUserHasWriteAccessOverCard(card, user)) {
-                        cardRepository.save(card).subscribe();
-                        tagService.deleteTagForCard(card.getId())
-                                .doOnSuccess(done -> Flux.fromIterable(card.getTags())
-                                        .flatMap(tagService::save)
-                                        .flatMap(tableTag -> tagService.saveTagForCard(card.getId(), tableTag))
-                                        .subscribe()
-                                )
-                                .subscribe();
+                        isSaved.set(true);
+                        card.setLastUpdatedBy(user.getName());
+                        Mono mono = card.getId() != null ? updateCardAndItsRelation(card) : saveCardAndItsRelation(card.setCreatedBy(user.getName()));
+                        mono.subscribe();
+
+                    } else {
+                        TableCardQueue cardQueue = cardToQueue(card)
+                                .setSuggestedBy(user.getName());
+                        cardRepository.addCardToQueue(cardQueue).subscribe();
                     }
-                    return cardRepository.getById(card.getId());
-                });
+                }).subscribe();
+        return isSaved.get();
     }
+
+    private Mono updateCardAndItsRelation(Card card) {
+        return tagService.deleteTagForCard(card.getId())
+                .doOnSuccess(done -> saveCardAndItsRelation(card).subscribe());
+    }
+
+
+    private Mono saveCardAndItsRelation(Card card) {
+        return cardRepository.save(card)
+                .doOnSuccess(savedCard -> Flux.fromIterable(card.getTags())
+                        .flatMap(tagService::save)
+                        .flatMap(tableTag -> tagService.saveTagForCard(savedCard.getId(), tableTag))
+                        .flatMap(tableCardTag -> cardRepository.getById(tableCardTag.getCardId()))
+                        .subscribe()
+                );
+
+    }
+
 
     public boolean isUserAllowedViewCard(Card card, User user) {
         return isAdmin(user) || isUserTribeManagerForTeam(card, user) || isCardBelongsToUserTeam(card, user);
@@ -58,6 +81,17 @@ public class CardService {
 
     private boolean isAdmin(User user) {
         return user.getAccessLevel() == AccessLevel.SUPER_ADMIN.value;
+    }
+
+    private TableCardQueue cardToQueue(Card card) {
+        return new TableCardQueue()
+                .setCardId(card.getId())
+                .setDescription(card.getDescription())
+                .setHidden(card.isHidden())
+                .setImageUrl(card.getImageUrl())
+                .setTeam(card.getTeam())
+                .setTribe(card.getTribe())
+                .setTitle(card.getTitle());
     }
 
 }
