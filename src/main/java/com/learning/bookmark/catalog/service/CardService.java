@@ -62,13 +62,18 @@ public class CardService {
 
     }
 
+    public void deleteCard(Integer cardId){
+        tagService.deleteTagForCard(cardId).subscribe();
+        cardRepository.delete(cardId).subscribe();
+    }
+
 
     public boolean isUserAllowedViewCard(Card card, User user) {
         return isAdmin(user) || isUserTribeManagerForTeam(card, user) || isCardBelongsToUserTeam(card, user);
     }
 
     private boolean isUserHasWriteAccessOverCard(Card card, User user) {
-        return (isCardBelongsToUserTeam(card, user) && user.getAccessLevel() > AccessLevel.READ.value) || isUserTribeManagerForTeam(card, user) || isAdmin(user);
+        return isAdmin(user) || (isCardBelongsToUserTeam(card, user) && user.getAccessLevel() > AccessLevel.READ.value) || isUserTribeManagerForTeam(card, user);
     }
 
     private boolean isCardBelongsToUserTeam(Card card, User user) {
