@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
-@RequestMapping("/api/v1/cards")
+@RequestMapping("/api/v1/card")
 @RequiredArgsConstructor
 public class CardController {
 
@@ -74,6 +74,11 @@ public class CardController {
         return cardService.save(card, user);
     }
 
+    @PostMapping
+    public void saveCard(@RequestBody Card card) {
+        cardService.save(card, "sankar");
+    }
+
     @GetMapping("/newCard/{user}")
     public boolean newCardTab(@PathVariable("user") String user) {
         Card card = new Card()
@@ -89,19 +94,19 @@ public class CardController {
         return cardService.save(card, user);
     }
 
-    @GetMapping(value = "/tag", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<TableTag> tags(@RequestParam("tag") String tag) {
-        return tagService.save(tag);
-    }
-
-    @GetMapping("/tagAll")
+    @GetMapping("/tags")
     public Flux<TableTag> tags() {
         return tagService.getTags();
     }
 
-    @GetMapping(value = "/cardQueue", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/queue", produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<TableCardQueue> cardQueue() {
         return cardRepository.getCardsInQueue();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteCard(@PathVariable("id") Integer id) {
+        cardService.deleteCard(id);
     }
 
 }
