@@ -6,19 +6,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class QueryConstant {
     public static final String FETCH_ALL_CARDS =
-            "select card.*, group_concat(tags.value separator ',') as tags, org.*\n" +
+            "select card.*, group_concat(tags.value separator ',') as tags\n" +
                     "from card\n" +
                     "left join card_tag on card.id = card_tag.cid\n" +
                     "left join tags on card_tag.tid = tags.id\n" +
-                    "left join org on org.id = card.org_id\n" +
                     "group by card.id";
 
     public static final String FIND_CARD_BY_ID =
-            "select card.*, group_concat(tags.value separator ',') as tags, org.*\n" +
+            "select card.*, group_concat(tags.value separator ',') as tags\n" +
                     "from card\n" +
                     "left join card_tag on card.id = card_tag.cid\n" +
                     "left join tags on card_tag.tid = tags.id\n" +
-                    "left join org on org.id = card.org_id\n" +
                     "where card.id = :card_id\n" +
                     "group by card.id";
 

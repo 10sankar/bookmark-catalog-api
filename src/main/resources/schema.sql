@@ -13,7 +13,8 @@ create table card(
    description VARCHAR(300),
    image_url VARCHAR(200),
    hidden boolean default false,
-   org_id int not null,
+   tribe VARCHAR(30) NOT NULL,
+   team VARCHAR(30) NOT NULL,
    created_by VARCHAR(50) not null,
    last_updated_by Varchar(100) not null
 );
@@ -45,7 +46,8 @@ create table card_queue(
    title VARCHAR(50),
    description VARCHAR(300),
    image_url VARCHAR(200),
-   team_id int,
+   tribe VARCHAR(30),
+   team VARCHAR(30),
    hidden boolean,
    remove boolean,
    suggested_by VARCHAR(50)

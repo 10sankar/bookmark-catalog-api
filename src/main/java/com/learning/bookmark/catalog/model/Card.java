@@ -23,7 +23,6 @@ public class Card {
     private String tribe;
     private String createdBy;
     private String lastUpdatedBy;
-    private Integer orgId;
     private List<String> tags;
 
     public TableCard toCardEntity() {
@@ -35,6 +34,7 @@ public class Card {
                 .setCreatedBy(this.createdBy)
                 .setLastUpdatedBy(this.lastUpdatedBy)
                 .setHidden(this.hidden)
-                .setOrgId(this.orgId);
+                .setTeam(this.team)
+                .setTribe(this.tribe);
     }
 }
