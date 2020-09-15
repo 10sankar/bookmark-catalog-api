@@ -1,8 +1,10 @@
 package com.learning.bookmark.catalog.service;
 
 import com.learning.bookmark.catalog.entity.TableCardTag;
+import com.learning.bookmark.catalog.entity.TableOrg;
 import com.learning.bookmark.catalog.entity.TableTag;
 import com.learning.bookmark.catalog.repo.CardTagRelationRepo;
+import com.learning.bookmark.catalog.repo.OrgTableRepo;
 import com.learning.bookmark.catalog.repo.TagsTableRepo;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
@@ -13,6 +15,11 @@ public class TagService {
 
     private final TagsTableRepo tagsTableRepo;
     private final CardTagRelationRepo cardTagRelationRepo;
+    private final OrgTableRepo orgTableRepo;
+
+    public Flux<TableOrg> getOrg() {
+        return orgTableRepo.findAll();
+    }
 
     public Mono<TableTag> save(String tag) {
         return tagsTableRepo.findByValue(tag)
