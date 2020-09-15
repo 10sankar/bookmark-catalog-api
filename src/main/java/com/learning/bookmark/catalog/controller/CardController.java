@@ -1,6 +1,7 @@
 package com.learning.bookmark.catalog.controller;
 
 import com.learning.bookmark.catalog.entity.TableCardQueue;
+import com.learning.bookmark.catalog.entity.TableOrg;
 import com.learning.bookmark.catalog.entity.TableTag;
 import com.learning.bookmark.catalog.model.Card;
 import com.learning.bookmark.catalog.model.User;
@@ -97,6 +98,11 @@ public class CardController {
     @GetMapping("/tags")
     public Flux<TableTag> tags() {
         return tagService.getTags();
+    }
+
+    @GetMapping("/org")
+    public Flux<TableOrg> org() {
+        return tagService.getOrg();
     }
 
     @GetMapping(value = "/queue", produces = MediaType.APPLICATION_JSON_VALUE)
