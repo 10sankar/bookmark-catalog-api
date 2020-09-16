@@ -2,6 +2,8 @@ package com.learning.bookmark.catalog.entity;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.List;
+
 public interface CardType {
 
     @Value("#{target.id}")
@@ -13,8 +15,8 @@ public interface CardType {
     @Value("#{target.description}")
     String getDescription();
 
-    @Value("#{target.bookmark_url}")
-    String getBookmarkUrl();
+    @Value("#{target.bookmark}")
+    String getBookmark();
 
     @Value("#{target.image_url}")
     String getImageUrl();
@@ -32,9 +34,9 @@ public interface CardType {
     String getLastUpdatedBy();
 
     @Value("#{target.hidden}")
-    boolean getHidden();
+    Boolean getHidden();
 
     @Value("#{target.tags}")
-    boolean getTags();
+    List<String> getTags();
 
 }
