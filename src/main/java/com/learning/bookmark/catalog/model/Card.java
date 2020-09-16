@@ -1,7 +1,6 @@
 package com.learning.bookmark.catalog.model;
 
 import com.learning.bookmark.catalog.entity.CardType;
-import com.learning.bookmark.catalog.entity.TableCard;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
