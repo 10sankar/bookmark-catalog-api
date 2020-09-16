@@ -25,14 +25,14 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.times;
 
 class CardServiceTest {
-    TagService tagService;
-    UserRepository userRepository;
-    CardRepository cardRepository;
-    CardQueueRepository cardQueueRepository;
+    private TagService tagService;
+    private UserRepository userRepository;
+    private CardRepository cardRepository;
+    private CardQueueRepository cardQueueRepository;
 
-    User testUser;
-    List<CardType> testCards;
-    CardService cardService;
+    private User testUser;
+    private List<CardType> testCards;
+    private CardService cardService;
 
     @BeforeEach
     void init() {
@@ -59,7 +59,7 @@ class CardServiceTest {
 
 
     @Test
-    void getCards_For_read_User() {
+    void getCardsForReadUser() {
         List<Card> actual;
 
         //Set User access :read ; tribe:tribe1; team:team1 || Able to see tribe1/team1 cards
@@ -72,7 +72,7 @@ class CardServiceTest {
     }
 
     @Test
-    void getCards_For_Tribe_Manager() {
+    void getCardsForTribeManager() {
         List<Card> actual;
         // Set User access :to Manager || able to see tribe1
 
@@ -84,7 +84,7 @@ class CardServiceTest {
     }
 
     @Test
-    void deleteCard_card_doesnt_exist() {
+    void deleteCardDoesntExist() {
         Mockito.doReturn(Optional.empty()).when(cardRepository).findById(any());
 
         assertThatExceptionOfType(NotFoundException.class)
@@ -92,7 +92,7 @@ class CardServiceTest {
     }
 
     @Test
-    void deleteCard_user_has_write_access() throws NotFoundException {
+    void deleteCardUserHasWriteAccess() throws NotFoundException {
         TableCard testCard = new TableCard().setId(1).setTeam("team1").setTribe("tribe1");
         Mockito.doReturn(Optional.of(testCard)).when(cardRepository).findById(any());
         testUser.setAccessLevel(AccessLevel.WRITE.value).setTeam("team1").setTribe("tribe1");
@@ -103,7 +103,7 @@ class CardServiceTest {
     }
 
     @Test
-    void deleteCard_user_doesnt_belong_to_team() throws NotFoundException {
+    void deleteCardUserDoesntBelongToTeam() throws NotFoundException {
         TableCard testCard = new TableCard().setId(1).setTeam("team1").setTribe("tribe1").setHidden(true);
         Mockito.doReturn(Optional.of(testCard)).when(cardRepository).findById(any());
         testUser.setAccessLevel(AccessLevel.WRITE.value).setTeam("team2").setTribe("tribe1");
@@ -116,7 +116,7 @@ class CardServiceTest {
     }
 
     @Test
-    void save_user_has_access() {
+    void saveCardForUserHasAccess() {
         testUser.setAccessLevel(AccessLevel.SUPER_ADMIN.value);
         Mockito.doReturn(testCards.get(0)).when(cardRepository).findByCardId(any());
         Mockito.doReturn(new TableCard().setId(1)).when(cardRepository).save(any());
@@ -133,7 +133,7 @@ class CardServiceTest {
     }
 
     @Test
-    void save_card_user_dont_access() {
+    void dontSaveCardForUserDontHaveAccess() {
         testUser.setTeam("team1").setTribe("tribe1").setAccessLevel(AccessLevel.READ.value);
 
         cardService.save((Card) testCards.get(0), "test user");
