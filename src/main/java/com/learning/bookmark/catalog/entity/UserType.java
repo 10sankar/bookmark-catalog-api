@@ -17,7 +17,7 @@ public interface UserType {
     String getTeam();
 
     @Value("#{target.access_level}")
-    String getAccessLevel();
+    Integer getAccessLevel();
 
 
 }
