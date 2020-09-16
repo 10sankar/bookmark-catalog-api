@@ -2,10 +2,10 @@ package com.learning.bookmark.catalog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.oas.annotations.EnableOpenApi;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableOpenApi
 @SpringBootApplication
+@EnableJpaRepositories
 public class BookmarkCatalogApiApplication {
 
     public static void main(String[] args) {

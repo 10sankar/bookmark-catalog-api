@@ -1,15 +1,26 @@
-server:
-  port: 8080
-
-logging:
-  level:
-    org.springframework.data.r2dbc: DEBUG
-
 spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          facebook:
-            client-id: 396769735046060
-            client-secret: 1b10af35d885c122f48d40626347e749
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+
+  datasource:
+    platform: h2
+    username: sa
+    password:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE;
+    driver-class-name: org.h2.Driver
+    initialization-mode: always
+
+  h2:
+    console:
+      enabled: true
+
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          facebook:
+#            client-id: 396769735046060
+#            client-secret: 1b10af35d885c122f48d40626347e749

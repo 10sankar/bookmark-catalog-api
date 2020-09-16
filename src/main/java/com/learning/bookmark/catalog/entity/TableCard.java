@@ -5,11 +5,11 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
+import javax.persistence.*;
 
-@Table("card")
+@Entity
+@Table(name = "card")
 @Getter
 @Setter
 @ToString
@@ -17,30 +17,31 @@ import org.springframework.data.relational.core.mapping.Table;
 public class TableCard {
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
-    @Column("title")
+    @Column(name = "title")
     private String title;
 
-    @Column("description")
+    @Column(name = "description")
     private String description;
 
-    @Column("image_url")
+    @Column(name = "image_url")
     private String imageUrl;
 
-    @Column("hidden")
+    @Column(name = "hidden")
     private boolean hidden;
 
-    @Column("tribe")
+    @Column(name = "tribe")
     private String tribe;
 
-    @Column("team")
+    @Column(name = "team")
     private String team;
 
-    @Column("created_by")
+    @Column(name = "created_by")
     private String createdBy;
 
-    @Column("last_updated_by")
+    @Column(name = "last_updated_by")
     private String lastUpdatedBy;
 }

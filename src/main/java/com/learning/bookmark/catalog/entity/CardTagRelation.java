@@ -4,28 +4,30 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
-@Table("card_tag")
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "card_tag")
 @Getter
 @Setter
 @ToString
 @Accessors(chain = true)
-public class TableCardTag {
+public class CardTagRelation {
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
-    @Column("cid")
+    @Column(name = "cid")
     private Integer cardId;
 
-    @Column("tid")
+    @Column(name = "tid")
     private Integer tagId;
 
-    public TableCardTag(Integer cardId, Integer tagId) {
+    public CardTagRelation(Integer cardId, Integer tagId) {
         this.cardId = cardId;
         this.tagId = tagId;
     }
