@@ -4,22 +4,23 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
-@Table("tags")
+@Table(name = "tags")
 @Getter
 @Setter
 @ToString
 @Accessors(chain = true)
-public class TableTag {
+public class Tag {
 
     @Id
-    @Column("id")
+    @Column(name = "id")
     private Integer id;
 
-    @Column("value")
+    @Column(name = "value")
     private String value;
 }

@@ -5,26 +5,26 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
+import javax.persistence.*;
 
-@Table("org")
+@Entity
+@Table(name = "org")
 @Getter
 @Setter
 @ToString
 @Accessors(chain = true)
-public class TableOrg {
+public class Group {
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
-    @Column("tribe_name")
+    @Column(name = "tribe_name")
     private String tribe;
 
-    @Column("team_name")
+    @Column(name = "team_name")
     private String team;
 
 }

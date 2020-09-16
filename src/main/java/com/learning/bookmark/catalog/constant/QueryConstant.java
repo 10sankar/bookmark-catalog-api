@@ -25,14 +25,4 @@ public class QueryConstant {
                     "WHERE u.org_id = o.id\n" +
                     "AND u.name = :username";
 
-    public static final String UPDATE_CARD_BY_ID =
-            "update card set title = :title, description =:description, image_url = :image_url, hidden = :hidden,\n" +
-                    "org_id = :org_id, created_by = :created_by, last_updated_by = :last_updated_by\n" +
-                    "where id = :cardId";
-
-    public static final String ADD_TAG =
-            "insert into tags(value) values(:tagname)";
-    public static final String FETCH_TAG =
-            "select * from tags where value = :tagname";
-
 }

@@ -4,46 +4,47 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+
+import javax.persistence.*;
 
 
-@Table("card_queue")
+@Entity
+@Table(name = "card_queue")
 @Getter
 @Setter
 @ToString
 @Accessors(chain = true)
-public class TableCardQueue {
+public class CardQueue {
 
     @Id
-    @Column("queue_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "queue_id")
     private Integer id;
 
-    @Column("cid")
+    @Column(name = "cid")
     private Integer cardId;
 
-    @Column("title")
+    @Column(name = "title")
     private String title;
 
-    @Column("description")
+    @Column(name = "description")
     private String description;
 
-    @Column("image_url")
+    @Column(name = "image_url")
     private String imageUrl;
 
-    @Column("hidden")
+    @Column(name = "hidden")
     private boolean hidden;
 
-    @Column("tribe")
+    @Column(name = "tribe")
     private String tribe;
 
-    @Column("team")
+    @Column(name = "team")
     private String team;
 
-    @Column("remove")
+    @Column(name = "remove")
     private Boolean remove;
 
-    @Column("suggested_by")
+    @Column(name = "suggested_by")
     private String suggestedBy;
 }
