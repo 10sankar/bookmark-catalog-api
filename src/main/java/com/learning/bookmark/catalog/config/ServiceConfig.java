@@ -1,5 +1,7 @@
 package com.learning.bookmark.catalog.config;
 
+import com.learning.bookmark.catalog.repo.CardTagRelationRepository;
+import com.learning.bookmark.catalog.repo.TagRepository;
 import com.learning.bookmark.catalog.service.CardService;
 import com.learning.bookmark.catalog.service.TagService;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +16,7 @@ public class ServiceConfig {
     }
 
     @Bean
-    public TagService tagService() {
-        return new TagService();
+    public TagService tagService(TagRepository tagRepository, CardTagRelationRepository cardTagRelationRepository) {
+        return new TagService(tagRepository, cardTagRelationRepository);
     }
 }
