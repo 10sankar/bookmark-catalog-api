@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 
@@ -30,8 +29,11 @@ public class TableCard {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "bookmark")
+    private String bookmark;
+
     @Column(name = "hidden")
-    private boolean hidden;
+    private Boolean hidden;
 
     @Column(name = "tribe")
     private String tribe;

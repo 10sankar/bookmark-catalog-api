@@ -33,6 +33,9 @@ public class CardQueue {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "bookmark")
+    private String bookmark;
+
     @Column(name = "hidden")
     private boolean hidden;
 
