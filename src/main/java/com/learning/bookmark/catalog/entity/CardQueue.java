@@ -1,5 +1,6 @@
 package com.learning.bookmark.catalog.entity;
 
+import com.learning.bookmark.catalog.service.BasicValidatorType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,15 +15,15 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Accessors(chain = true)
-public class CardQueue {
+public class CardQueue implements BasicValidatorType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "queue_id")
-    private Integer id;
+    private Integer queueId;
 
     @Column(name = "cid")
-    private Integer cardId;
+    private Integer id;
 
     @Column(name = "title")
     private String title;

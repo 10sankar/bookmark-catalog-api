@@ -10,12 +10,16 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceConfig {
 
     @Bean
+    public UserService userService(UserRepository userRepository) {
+        return new UserService(userRepository);
+    }
+    @Bean
     public CardService cardService(
-            UserRepository userRepository,
+            UserService userService,
             CardRepository cardRepository,
             CardQueueRepository cardQueueRepository,
             TagService tagService) {
-        return new CardService(userRepository, cardRepository, cardQueueRepository, tagService);
+        return new CardService(userService, cardRepository, cardQueueRepository, tagService);
     }
 
     @Bean

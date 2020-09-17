@@ -1,6 +1,7 @@
 package com.learning.bookmark.catalog.model;
 
 import com.learning.bookmark.catalog.entity.CardType;
+import com.learning.bookmark.catalog.service.BasicValidatorType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +14,7 @@ import java.util.List;
 @Setter
 @ToString
 @Accessors(chain = true)
-public class Card implements CardType {
+public class Card implements CardType, BasicValidatorType {
     private Integer id;
     private String title;
     private String description;

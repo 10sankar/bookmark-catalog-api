@@ -1,36 +1,36 @@
 package com.learning.bookmark.catalog.entity;
 
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table(name = "card_tag")
+@Table(name = "user")
 @Getter
 @Setter
 @ToString
 @Accessors(chain = true)
-@NoArgsConstructor
-public class CardTagRelation {
+public class TableUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "cid")
-    private Integer cardId;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "tid")
-    private Integer tagId;
+    @Column(name = "tribe_name")
+    private String tribe;
 
-    public CardTagRelation(Integer cardId, Integer tagId) {
-        this.cardId = cardId;
-        this.tagId = tagId;
-    }
+    @Column(name = "team_name")
+    private String team;
+
+    @Column(name = "access_level")
+    private Integer accessLevel;
+
 }
