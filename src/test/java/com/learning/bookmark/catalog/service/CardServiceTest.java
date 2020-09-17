@@ -26,7 +26,7 @@ import static org.mockito.Mockito.times;
 
 class CardServiceTest {
     private TagService tagService;
-    private UserRepository userRepository;
+    private UserService userService;
     private CardRepository cardRepository;
     private CardQueueRepository cardQueueRepository;
 
@@ -36,11 +36,11 @@ class CardServiceTest {
 
     @BeforeEach
     void init() {
-        userRepository = Mockito.mock(UserRepository.class);
+        userService = Mockito.mock(UserService.class);
         cardRepository = Mockito.mock(CardRepository.class);
         cardQueueRepository = Mockito.mock(CardQueueRepository.class);
         tagService = Mockito.mock(TagService.class);
-        cardService = new CardService(userRepository, cardRepository, cardQueueRepository, tagService);
+        cardService = new CardService(userService, cardRepository, cardQueueRepository, tagService);
 
         testCards = Arrays.asList(
                 new Card().setId(1).setTribe("tribe1").setTeam("team1").setTitle("Card1").setHidden(true),
@@ -54,7 +54,7 @@ class CardServiceTest {
         Mockito.doReturn(testCards).when(cardRepository).findAllCards();
 
         testUser = new User().setId(1).setName("test user");
-        Mockito.doReturn(testUser).when(userRepository).findByUser(any());
+        Mockito.doReturn(testUser).when(userService).getUserDetails(any());
     }
 
 
@@ -65,7 +65,7 @@ class CardServiceTest {
         //Set User access :read ; tribe:tribe1; team:team1 || Able to see tribe1/team1 cards
         testUser.setTribe("tribe1").setTeam("team1")
                 .setAccessLevel(AccessLevel.READ.value);
-        Mockito.doReturn(testUser).when(userRepository).findByUser(any());
+        Mockito.doReturn(testUser).when(userService).getUserDetails(any());
 
         actual = cardService.getCards("test user");
         assertThat(actual).hasSize(2);

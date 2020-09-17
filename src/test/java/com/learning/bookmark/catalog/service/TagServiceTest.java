@@ -36,7 +36,7 @@ class TagServiceTest {
     @Test
     void deleteTagForCard() {
         tagService.deleteTagForCard(1);
-        verify(mockRelationRepository, times(1)).deleteAllByCardId(any());
+        verify(mockRelationRepository, times(1)).deleteByCardId(any());
     }
 
     @Test

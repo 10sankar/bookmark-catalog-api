@@ -21,7 +21,7 @@ public class TagService {
     }
 
     public void deleteTagForCard(Integer cardId) {
-        cardTagRelationRepository.deleteAllByCardId(cardId);
+        cardTagRelationRepository.deleteByCardId(cardId);
     }
 
     public CardTagRelation saveTagForCard(Integer cardId, Integer tagId) {

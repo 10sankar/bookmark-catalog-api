@@ -51,9 +51,9 @@ values
 insert into card_queue
 (queue_id,cid, title,description,image_url,bookmark,tribe,team,hidden,remove,suggested_by)
 values
-(1,3,'change title','change desc','new url', 'new bookmark url','HTH','JAM' 'normal',false ,false ,'read'),
-(2,5,'change title','change desc','new url', 'new bookmark url','GTG','PLQ' 'normal',true ,false ,'read' ),
-(3,2,'change title','change desc','new url', 'new bookmark url','GTG','YER' 'normal',true ,true ,'read' );
+(1,3,'change title','change desc','new url', 'new bookmark url','HTH','JAM',false ,false ,'read'),
+(2,5,'change title','change desc','new url', 'new bookmark url','GTG','PLQ',true ,false ,'read' ),
+(3,2,'change title','change desc','new url', 'new bookmark url','GTG','YER',true ,true ,'read' );
 
 
 ---- Group Creation Queue -------

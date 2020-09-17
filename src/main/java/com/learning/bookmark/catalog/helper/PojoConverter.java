@@ -66,9 +66,21 @@ public final class PojoConverter {
 
     public static CardQueue cardToQueue(Card card) {
         return new CardQueue()
-                .setCardId(card.getId())
+                .setId(card.getId())
                 .setDescription(card.getDescription())
                 .setHidden(card.getHidden())
+                .setImageUrl(card.getImageUrl())
+                .setTribe(card.getTribe())
+                .setTitle(card.getTitle())
+                .setBookmark(card.getBookmark())
+                .setTeam(card.getTeam());
+    }
+
+    public static Card cardQueueToPojo(CardQueue card) {
+        return new Card()
+                .setId(card.getId())
+                .setDescription(card.getDescription())
+                .setHidden(card.isHidden())
                 .setImageUrl(card.getImageUrl())
                 .setTribe(card.getTribe())
                 .setTitle(card.getTitle())
