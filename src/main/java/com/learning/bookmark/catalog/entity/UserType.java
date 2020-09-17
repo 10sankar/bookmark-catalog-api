@@ -13,7 +13,7 @@ public interface UserType {
     @Value("#{target.tribe_name}")
     String getTribe();
 
-    @Value("#{target.Team}")
+    @Value("#{target.team_name}")
     String getTeam();
 
     @Value("#{target.access_level}")
