@@ -1,11 +1,13 @@
 package com.learning.bookmark.catalog.controller;
 
 import com.learning.bookmark.catalog.NotFoundException;
+import com.learning.bookmark.catalog.UnauthorizedAccessException;
+import com.learning.bookmark.catalog.entity.CardQueue;
 import com.learning.bookmark.catalog.entity.Group;
 import com.learning.bookmark.catalog.model.Card;
 import com.learning.bookmark.catalog.repo.GroupRepository;
+import com.learning.bookmark.catalog.service.CardQueueService;
 import com.learning.bookmark.catalog.service.CardService;
-import com.learning.bookmark.catalog.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +24,43 @@ import java.util.Optional;
 public class CardController {
 
     private final CardService cardService;
-    private final TagService tagService;
+    private final CardQueueService cardQueueService;
     private final GroupRepository groupRepository;
 
     @GetMapping(value = "/org")
     public ResponseEntity<List<Group>> getOrg() {
         List<Group> groups = groupRepository.findAll();
         return new ResponseEntity<>(groups, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/queue")
+    public ResponseEntity<List<CardQueue>> getQueueItems(@RequestParam(value = "user", required = false) String user) {
+        if (StringUtils.isEmpty(user)) {
+            user = "sankar";
+        }
+        List<CardQueue> cardsInQueue = cardQueueService.getCardsInQueue(user);
+        return new ResponseEntity<>(cardsInQueue, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/queue/{id}")
+    public ResponseEntity<HttpStatus> getQueueItems(
+            @PathVariable(value = "id") Integer queueId,
+            @RequestParam(value = "validate") boolean validate,
+            @RequestParam(value = "user", required = false) String user) {
+        if (StringUtils.isEmpty(user)) {
+            user = "sankar";
+        }
+        try {
+            if (!validate) {
+                cardQueueService.deleteQueue(queueId, user);
+            }
+            cardQueueService.processQueue(queueId, user);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (UnauthorizedAccessException e) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping
