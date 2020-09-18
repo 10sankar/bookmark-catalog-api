@@ -24,11 +24,8 @@ public class TableUser {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "tribe_name")
-    private String tribe;
-
-    @Column(name = "team_name")
-    private String team;
+    @Column(name = "org_id")
+    private Integer orgId;
 
     @Column(name = "access_level")
     private Integer accessLevel;

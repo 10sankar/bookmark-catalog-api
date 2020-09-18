@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceConfig {
 
     @Bean
-    public UserService userService(UserRepository userRepository) {
-        return new UserService(userRepository);
+    public UserService userService(UserRepository userRepository, GroupRepository groupRepository) {
+        return new UserService(groupRepository, userRepository);
     }
 
     @Bean

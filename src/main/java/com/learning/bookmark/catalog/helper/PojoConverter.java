@@ -1,9 +1,6 @@
 package com.learning.bookmark.catalog.helper;
 
-import com.learning.bookmark.catalog.entity.CardQueue;
-import com.learning.bookmark.catalog.entity.CardType;
-import com.learning.bookmark.catalog.entity.TableCard;
-import com.learning.bookmark.catalog.entity.UserType;
+import com.learning.bookmark.catalog.entity.*;
 import com.learning.bookmark.catalog.model.Card;
 import com.learning.bookmark.catalog.model.User;
 import lombok.AccessLevel;
