@@ -16,6 +16,11 @@ spring:
     console:
       enabled: true
 
+url-shortener:
+  secret: pwd
+  ui-domain: http://localhost:4200
+  api-domain: http://localhost:8080
+
 #spring:
 #  security:
 #    oauth2:

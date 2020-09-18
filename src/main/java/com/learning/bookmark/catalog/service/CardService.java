@@ -38,6 +38,14 @@ public class CardService {
                 .collect(Collectors.toList());
     }
 
+    public String getBookmarkForCard(Integer cardId) throws NotFoundException {
+        Optional<TableCard> tableCard = cardRepository.findById(cardId);
+        if (tableCard.isEmpty()) {
+            throw new NotFoundException("Invalid card id : " + cardId);
+        }
+        return tableCard.get().getBookmark();
+    }
+
     public Optional<Integer> deleteCard(Integer cardId, String userId) throws NotFoundException {
         Optional<TableCard> byId = cardRepository.findById(cardId);
         if (byId.isEmpty()) {
@@ -87,7 +95,7 @@ public class CardService {
         TableCard tableCard = cardRepository.save(PojoConverter.pojoCardToEntity(card));
 
         if (!CollectionUtils.isEmpty(card.getTags())) {
-            if(card.getTags().size() ==1){
+            if (card.getTags().size() == 1) {
                 card.getTags().addAll(Arrays.asList(
                         card.getTags().get(0).split(","))
                 );

@@ -1,14 +1,14 @@
 insert into card
 (id, title, description, image_url,hidden,bookmark,tribe,team,created_by, last_updated_by)
 values
-(1, 'Card title', 'say something about card', 'http://image.url',false,'www.google.com','LTL','CRX','sankar','sankar'),
-(2, 'Card title', 'say something about card', 'http://image.url',true, 'www.google.com','GTG','YER','sankar','sankar'),
-(3, 'Card title', 'say something about card', 'http://image.url',false,'www.google.com','HTH','JAM','sankar','sankar'),
-(4, 'Card title', 'say something about card', 'http://image.url',false,'www.google.com','LTL','OLJ','sankar','sankar'),
-(5, 'Card title', 'say something about card', 'http://image.url',false,'www.google.com','GTG','PLQ','sankar','sankar'),
-(6, 'Card title', 'say something about card', 'http://image.url',true, 'www.google.com','HTH','KTM','sankar','sankar'),
-(7, 'Card title', 'say something about card', 'http://image.url',false,'www.google.com','LTL','CRX','sankar','sankar'),
-(8, 'Card title', 'say something about card', 'http://image.url',false,'www.google.com','GTG','YER','sankar','sankar');
+(1, 'Card title', 'say something about card', 'http://image.url',false,'https://www.google.com',  'LTL','CRX','sankar','sankar'),
+(2, 'Card title', 'say something about card', 'http://image.url',true, 'https://www.linkedin.com','GTG','YER','sankar','sankar'),
+(3, 'Card title', 'say something about card', 'http://image.url',false,'https://www.youtube.com', 'HTH','JAM','sankar','sankar'),
+(4, 'Card title', 'say something about card', 'http://image.url',false,'https://www.google.com',   'LTL','OLJ','sankar','sankar'),
+(5, 'Card title', 'say something about card', 'http://image.url',false,'https://www.linkedin.com', 'GTG', 'PLQ','sankar','sankar'),
+(6, 'Card title', 'say something about card', 'http://image.url',true, 'https://www.youtube.com', 'HTH', 'KTM','sankar','sankar'),
+(7, 'Card title', 'say something about card', 'http://image.url',false,'https://www.google.com','LTL',    'CRX','sankar','sankar'),
+(8, 'Card title', 'say something about card', 'http://image.url',false,'https://www.youtube.com','GTG',    'YER','sankar','sankar');
 
 
 insert into org
@@ -51,9 +51,9 @@ values
 insert into card_queue
 (queue_id,cid, title,description,image_url,bookmark,tribe,team,hidden,remove,suggested_by)
 values
-(1,3,'change title','change desc','new url', 'new bookmark url','HTH','JAM',false ,false ,'read'),
-(2,5,'change title','change desc','new url', 'new bookmark url','GTG','PLQ',true ,false ,'read' ),
-(3,2,'change title','change desc','new url', 'new bookmark url','GTG','YER',true ,true ,'read' );
+(1,3,'change title','change desc','new url', 'https://www.google.com','HTH','JAM',false ,false ,'read'),
+(2,5,'change title','change desc','new url', 'https://www.linkedin.com','GTG','PLQ',true ,false ,'read' ),
+(3,2,'change title','change desc','new url', 'https://www.youtube.com','GTG','YER',true ,true ,'read' );
 
 
 ---- Group Creation Queue -------
